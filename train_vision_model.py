@@ -9,6 +9,7 @@ import torch.optim as optim
 from torch.utils.data import Dataset, DataLoader
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import classification_report, confusion_matrix, accuracy_score
+from sklearn.utils.class_weight import compute_class_weight
 
 from resnet18_model import build_resnet18
 
@@ -19,16 +20,35 @@ def set_seed(seed=42):
     if torch.cuda.is_available():
         torch.cuda.manual_seed_all(seed)
 
-def preprocess_image(img, is_train=True):
+def preprocess_image_train(img):
     img = img.resize((224, 224))
     
-    if is_train:
-        if random.random() > 0.5:
-            img = img.transpose(Image.FLIP_LEFT_RIGHT)
-        if random.random() > 0.5:
-            angle = random.uniform(-10, 10)
-            img = img.rotate(angle)
+    # Anatomically valid ultrasound augmentations (NO vertical flip!)
+    if random.random() > 0.5:
+        img = img.transpose(Image.FLIP_LEFT_RIGHT)
+    if random.random() > 0.5:
+        angle = random.uniform(-8, 8)
+        img = img.rotate(angle)
 
+    arr = np.array(img, dtype=np.float32) / 255.0
+    if arr.ndim == 2:
+        arr = np.stack([arr]*3, axis=-1)
+    elif arr.shape[2] == 4:
+        arr = arr[:, :, :3]
+
+    if random.random() > 0.5:
+        factor = random.uniform(0.9, 1.1)
+        arr = np.clip(arr * factor, 0.0, 1.0)
+
+    mean = np.array([0.485, 0.456, 0.406], dtype=np.float32)
+    std = np.array([0.229, 0.224, 0.225], dtype=np.float32)
+    arr = (arr - mean) / std
+
+    tensor = torch.from_numpy(arr).permute(2, 0, 1).float()
+    return tensor
+
+def preprocess_image_val(img):
+    img = img.resize((224, 224))
     arr = np.array(img, dtype=np.float32) / 255.0
     if arr.ndim == 2:
         arr = np.stack([arr]*3, axis=-1)
@@ -41,6 +61,12 @@ def preprocess_image(img, is_train=True):
 
     tensor = torch.from_numpy(arr).permute(2, 0, 1).float()
     return tensor
+
+def preprocess_image(img, is_train=False):
+    if is_train:
+        return preprocess_image_train(img)
+    else:
+        return preprocess_image_val(img)
 
 class UltrasoundDataset(Dataset):
     def __init__(self, image_paths, labels, is_train=True):
@@ -58,11 +84,15 @@ class UltrasoundDataset(Dataset):
         except Exception:
             img = Image.new('RGB', (224, 224), color=(0, 0, 0))
 
-        tensor = preprocess_image(img, is_train=self.is_train)
+        if self.is_train:
+            tensor = preprocess_image_train(img)
+        else:
+            tensor = preprocess_image_val(img)
+            
         label = self.labels[idx]
         return tensor, label
 
-def load_dataset_paths(dataset_dir, max_samples_per_class=500):
+def load_dataset_paths(dataset_dir, max_samples_per_class=700):
     classes = ['F0', 'F1', 'F2', 'F3', 'F4']
     image_paths = []
     labels = []
@@ -80,13 +110,13 @@ def load_dataset_paths(dataset_dir, max_samples_per_class=500):
 
     return image_paths, labels, classes
 
-def train_vision_pipeline(dataset_dir, models_dir, epochs=5, batch_size=32, lr=0.0003):
+def train_vision_pipeline(dataset_dir, models_dir, epochs=8, batch_size=32, lr=0.0003):
     os.makedirs(models_dir, exist_ok=True)
     set_seed(42)
 
-    print("Loading ultrasound dataset paths...")
-    image_paths, labels, class_names = load_dataset_paths(dataset_dir, max_samples_per_class=600)
-    print(f"Total samples selected for training/validation: {len(image_paths)}")
+    print("Loading dataset paths...")
+    image_paths, labels, class_names = load_dataset_paths(dataset_dir, max_samples_per_class=700)
+    print(f"Total samples: {len(image_paths)}")
 
     train_paths, val_paths, train_labels, val_labels = train_test_split(
         image_paths, labels, test_size=0.2, random_state=42, stratify=labels
@@ -99,34 +129,48 @@ def train_vision_pipeline(dataset_dir, models_dir, epochs=5, batch_size=32, lr=0
     val_loader = DataLoader(val_dataset, batch_size=batch_size, shuffle=False, num_workers=0)
 
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-    print(f"Using device: {device}")
+    print(f"Device: {device}")
 
-    # Build ResNet18 model
     model = build_resnet18(num_classes=len(class_names))
 
-    # Load ImageNet Transfer Learning Pretrained Weights
     url = "https://download.pytorch.org/models/resnet18-f37072fd.pth"
     try:
-        print("Loading ImageNet pre-trained transfer learning weights...")
+        print("Loading ImageNet pre-trained weights...")
         state_dict = torch.hub.load_state_dict_from_url(url, progress=True)
         model_dict = model.state_dict()
         pretrained_dict = {k: v for k, v in state_dict.items() if k in model_dict and model_dict[k].shape == v.shape}
         model_dict.update(pretrained_dict)
         model.load_state_dict(model_dict)
-        print("ImageNet Transfer Learning features loaded successfully!")
+        print("ImageNet transfer learning weights loaded successfully!")
     except Exception as e:
-        print(f"Could not download ImageNet weights ({e}), training from scratch.")
+        print(f"Could not load ImageNet weights ({e}), training from scratch.")
 
     model = model.to(device)
 
-    criterion = nn.CrossEntropyLoss()
-    optimizer = optim.AdamW(model.parameters(), lr=lr, weight_decay=1e-4)
+    class_weights = compute_class_weight(
+        class_weight='balanced',
+        classes=np.unique(train_labels),
+        y=np.array(train_labels)
+    )
+    class_weights_tensor = torch.tensor(class_weights, dtype=torch.float32).to(device)
+
+    criterion = nn.CrossEntropyLoss(weight=class_weights_tensor)
+    
+    optimizer = optim.AdamW([
+        {'params': model.fc.parameters(), 'lr': lr * 2},
+        {'params': model.layer4.parameters(), 'lr': lr},
+        {'params': model.layer3.parameters(), 'lr': lr * 0.5},
+        {'params': model.layer2.parameters(), 'lr': lr * 0.2},
+        {'params': model.layer1.parameters(), 'lr': lr * 0.1},
+        {'params': model.conv1.parameters(), 'lr': lr * 0.1},
+    ], weight_decay=1e-4)
+
     scheduler = optim.lr_scheduler.CosineAnnealingLR(optimizer, T_max=epochs)
 
     history = {'train_loss': [], 'val_loss': [], 'val_acc': []}
     best_acc = 0.0
 
-    print("Starting ResNet18 transfer learning fine-tuning...")
+    print(f"Starting fine-tuning for {epochs} epochs...")
     for epoch in range(epochs):
         model.train()
         running_loss = 0.0
@@ -170,8 +214,9 @@ def train_vision_pipeline(dataset_dir, models_dir, epochs=5, batch_size=32, lr=0
         if val_acc >= best_acc:
             best_acc = val_acc
             torch.save(model.state_dict(), os.path.join(models_dir, 'resnet18_cirrhosis.pth'))
+            print(f"Saved best model (Val Acc: {val_acc*100:.2f}%)")
 
-    # Final Evaluation
+    # Final Evaluation & Metrics Export
     model.eval()
     all_preds = []
     all_targets = []
@@ -197,11 +242,11 @@ def train_vision_pipeline(dataset_dir, models_dir, epochs=5, batch_size=32, lr=0
     with open(os.path.join(models_dir, 'vision_metrics.json'), 'w') as f:
         json.dump(metrics, f, indent=4)
 
-    print(f"ResNet18 Training Complete! Best Val Accuracy: {best_acc*100:.2f}%")
+    print(f"Fine-Tuning Complete! Best Val Accuracy: {best_acc*100:.2f}%")
     return model, metrics
 
 if __name__ == '__main__':
     base_dir = r'c:\Users\Rajasekar\OneDrive\Desktop\Liver Cirrhosis Detection'
     ds_dir = os.path.join(base_dir, 'Dataset')
     models_dir = os.path.join(base_dir, 'models')
-    train_vision_pipeline(ds_dir, models_dir, epochs=5, batch_size=32)
+    train_vision_pipeline(ds_dir, models_dir, epochs=8, batch_size=32)
