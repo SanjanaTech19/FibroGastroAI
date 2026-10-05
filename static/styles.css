@@ -1,36 +1,36 @@
 @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&display=swap');
 
 :root {
-    /* Light Brown & Red Family Palette */
-    --bg-dark: #1E1214;                 /* Warm Mahogany / Chestnut Base */
-    --bg-card: rgba(48, 29, 33, 0.78);   /* Glassmorphic Warm Rosewood Card */
-    --bg-card-hover: rgba(68, 41, 46, 0.88);
+    /* Electric Cyber & Ocean Blue Palette */
+    --bg-dark: #070D1B;                 /* Deep Ocean Midnight Base */
+    --bg-card: rgba(15, 23, 42, 0.75);   /* Glassmorphic Cyber Slate Card */
+    --bg-card-hover: rgba(30, 41, 59, 0.88);
     
     /* Strokes & Glows */
-    --border-card: rgba(232, 154, 138, 0.18);
-    --border-accent: rgba(228, 105, 92, 0.45);
-    --border-glow: rgba(196, 85, 75, 0.45);
+    --border-card: rgba(56, 189, 248, 0.22);
+    --border-accent: rgba(14, 165, 233, 0.55);
+    --border-glow: rgba(56, 189, 248, 0.45);
     
     /* Typography Palette */
-    --text-main: #FFF5F2;               /* Warm Cream White */
-    --text-sub: #E5C0B7;                /* Soft Rose-Beige Subtext */
-    --text-muted: #C4988E;              /* Muted Chestnut Text */
+    --text-main: #F0F9FF;               /* Crisp Ice White */
+    --text-sub: #BAE6FD;                /* Soft Sky Blue Subtext */
+    --text-muted: #7DD3FC;              /* Muted Cyan Text */
     
-    /* Signature Brand Colors (Light Brown & Red Family) */
-    --red-dark: #732B25;
-    --red-terracotta: #A64B3B;
-    --red-coral: #C4554B;
-    --rose-gold: #E89A8A;
-    --brown-light: #D9A07B;
-    --brown-warm: #8C533E;
+    /* Signature Brand Colors (Electric & Ocean Blue Family) */
+    --blue-dark: #0F172A;
+    --blue-deep: #1E3A8A;
+    --blue-royal: #2563EB;
+    --blue-cyan: #0EA5E9;
+    --blue-sky: #38BDF8;
+    --blue-ice: #93C5FD;
 
     /* Glows */
-    --rose-glow: rgba(228, 105, 92, 0.38);
-    --terracotta-glow: rgba(196, 85, 75, 0.4);
-    --gold-glow: rgba(232, 154, 138, 0.35);
+    --rose-glow: rgba(56, 189, 248, 0.45);
+    --terracotta-glow: rgba(14, 165, 233, 0.4);
+    --gold-glow: rgba(125, 211, 252, 0.35);
 
-    --rose: #E05263;
-    --emerald: #34D399;
+    --rose: #F43F5E;
+    --emerald: #10B981;
     --amber: #F59E0B;
 }
 
@@ -44,10 +44,10 @@
 body {
     background-color: var(--bg-dark);
     background-image: 
-        radial-gradient(at 15% 15%, rgba(196, 85, 75, 0.32) 0px, transparent 45%),
-        radial-gradient(at 85% 15%, rgba(232, 154, 138, 0.22) 0px, transparent 45%),
-        radial-gradient(at 50% 85%, rgba(217, 160, 123, 0.18) 0px, transparent 50%),
-        radial-gradient(at 85% 85%, rgba(115, 43, 37, 0.35) 0px, transparent 45%);
+        radial-gradient(at 15% 15%, rgba(14, 165, 233, 0.28) 0px, transparent 45%),
+        radial-gradient(at 85% 15%, rgba(56, 189, 248, 0.22) 0px, transparent 45%),
+        radial-gradient(at 50% 85%, rgba(37, 99, 235, 0.20) 0px, transparent 50%),
+        radial-gradient(at 85% 85%, rgba(30, 58, 138, 0.35) 0px, transparent 45%);
     color: var(--text-main);
     min-height: 100vh;
     overflow-x: hidden;
@@ -61,7 +61,7 @@ body {
     border: 1px solid var(--border-card);
     border-radius: 20px;
     padding: 24px;
-    box-shadow: 0 15px 35px -10px rgba(25, 12, 14, 0.8);
+    box-shadow: 0 15px 35px -10px rgba(7, 13, 27, 0.85);
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     position: relative;
     overflow: hidden;
@@ -69,12 +69,12 @@ body {
 
 .glass-card:hover {
     border-color: var(--border-accent);
-    box-shadow: 0 20px 45px -10px rgba(232, 154, 138, 0.22);
+    box-shadow: 0 20px 45px -10px rgba(56, 189, 248, 0.25);
 }
 
 /* Top App Header */
 .app-header {
-    background: rgba(30, 18, 20, 0.88);
+    background: rgba(11, 19, 43, 0.88);
     backdrop-filter: blur(20px);
     border-bottom: 1px solid var(--border-card);
     padding: 18px 40px;
@@ -95,7 +95,7 @@ body {
 .brand-icon-box {
     width: 50px;
     height: 50px;
-    background: linear-gradient(135deg, var(--red-terracotta) 0%, var(--red-coral) 50%, var(--rose-gold) 100%);
+    background: linear-gradient(135deg, var(--blue-deep) 0%, var(--blue-royal) 50%, var(--blue-sky) 100%);
     border-radius: 14px;
     display: flex;
     align-items: center;
@@ -109,7 +109,7 @@ body {
     font-size: 1.6rem;
     font-weight: 800;
     letter-spacing: -0.02em;
-    background: linear-gradient(90deg, #FFF5F2 0%, var(--rose-gold) 50%, var(--brown-light) 100%);
+    background: linear-gradient(90deg, #FFFFFF 0%, var(--blue-sky) 50%, var(--blue-ice) 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
@@ -124,29 +124,29 @@ body {
     display: flex;
     align-items: center;
     gap: 10px;
-    background: rgba(232, 154, 138, 0.12);
-    border: 1px solid rgba(232, 154, 138, 0.35);
+    background: rgba(56, 189, 248, 0.12);
+    border: 1px solid rgba(56, 189, 248, 0.35);
     padding: 8px 18px;
     border-radius: 30px;
     font-size: 0.85rem;
-    color: var(--rose-gold);
+    color: var(--blue-sky);
     font-weight: 600;
-    box-shadow: 0 0 18px rgba(232, 154, 138, 0.18);
+    box-shadow: 0 0 18px rgba(56, 189, 248, 0.18);
 }
 
 .status-dot {
     width: 10px;
     height: 10px;
-    background: var(--rose-gold);
+    background: var(--blue-sky);
     border-radius: 50%;
-    box-shadow: 0 0 12px var(--rose-gold);
+    box-shadow: 0 0 12px var(--blue-sky);
     animation: pulse-ring 2s cubic-bezier(0.455, 0.03, 0.515, 0.955) infinite;
 }
 
 @keyframes pulse-ring {
-    0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(232, 154, 138, 0.7); }
-    70% { transform: scale(1.05); box-shadow: 0 0 0 10px rgba(232, 154, 138, 0); }
-    100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(232, 154, 138, 0); }
+    0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(56, 189, 248, 0.7); }
+    70% { transform: scale(1.05); box-shadow: 0 0 0 10px rgba(56, 189, 248, 0); }
+    100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(56, 189, 248, 0); }
 }
 
 /* Floating Navigation Tabs */
@@ -161,7 +161,7 @@ body {
 .nav-tabs-container {
     display: flex;
     gap: 8px;
-    background: rgba(30, 18, 20, 0.85);
+    background: rgba(15, 23, 42, 0.85);
     padding: 6px;
     border-radius: 16px;
     border: 1px solid var(--border-card);
@@ -185,11 +185,11 @@ body {
 
 .tab-btn:hover {
     color: var(--text-main);
-    background: rgba(232, 154, 138, 0.12);
+    background: rgba(56, 189, 248, 0.12);
 }
 
 .tab-btn.active {
-    background: linear-gradient(135deg, var(--red-terracotta) 0%, var(--red-coral) 50%, var(--rose-gold) 100%);
+    background: linear-gradient(135deg, var(--blue-cyan) 0%, var(--blue-royal) 100%);
     color: #FFFFFF;
     box-shadow: 0 4px 22px var(--terracotta-glow);
 }
@@ -219,7 +219,7 @@ body {
 .pill-selector {
     display: flex;
     gap: 6px;
-    background: rgba(30, 18, 20, 0.6);
+    background: rgba(15, 23, 42, 0.6);
     padding: 4px;
     border-radius: 12px;
     border: 1px solid var(--border-card);
@@ -238,7 +238,7 @@ body {
 }
 
 .pill-btn.active {
-    background: linear-gradient(135deg, var(--red-terracotta) 0%, var(--rose-gold) 100%);
+    background: linear-gradient(135deg, var(--blue-cyan) 0%, var(--blue-sky) 100%);
     color: #FFFFFF;
     box-shadow: 0 0 15px var(--terracotta-glow);
 }
@@ -255,7 +255,7 @@ body {
 }
 
 .custom-select, .custom-input {
-    background: rgba(30, 18, 20, 0.8);
+    background: rgba(15, 23, 42, 0.85);
     border: 1px solid var(--border-card);
     color: var(--text-main);
     padding: 12px 16px;
@@ -267,7 +267,7 @@ body {
 }
 
 .custom-select:focus, .custom-input:focus {
-    border-color: var(--rose-gold);
+    border-color: var(--blue-sky);
     box-shadow: 0 0 18px var(--gold-glow);
 }
 
@@ -279,14 +279,14 @@ body {
 }
 
 .range-input {
-    accent-color: var(--rose-gold);
+    accent-color: var(--blue-sky);
     flex: 1;
     height: 6px;
 }
 
 /* Image Viewer Boxes */
 .viewer-box {
-    background: #0E0708;
+    background: #060B16;
     border-radius: 16px;
     overflow: hidden;
     height: 250px;
@@ -311,7 +311,7 @@ body {
 
 /* Stage Probability Progress Bars */
 .prob-card {
-    background: rgba(30, 18, 20, 0.6);
+    background: rgba(15, 23, 42, 0.65);
     border: 1px solid var(--border-card);
     border-radius: 12px;
     padding: 12px 16px;
@@ -341,7 +341,7 @@ body {
 
 /* Action Buttons */
 .btn-glow {
-    background: linear-gradient(135deg, var(--red-terracotta) 0%, var(--red-coral) 50%, var(--rose-gold) 100%);
+    background: linear-gradient(135deg, var(--blue-deep) 0%, var(--blue-royal) 50%, var(--blue-sky) 100%);
     color: #FFFFFF;
     font-weight: 700;
     border: none;
@@ -367,8 +367,8 @@ body {
 .callout-card {
     padding: 20px;
     border-radius: 16px;
-    border-left: 5px solid var(--rose-gold);
-    background: rgba(232, 154, 138, 0.12);
+    border-left: 5px solid var(--blue-sky);
+    background: rgba(56, 189, 248, 0.12);
     margin-bottom: 18px;
 }
 

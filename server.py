@@ -18,7 +18,7 @@ from fastapi.responses import HTMLResponse, FileResponse
 from resnet18_model import build_resnet18
 from train_vision_model import preprocess_image
 from gradcam import GradCAM, overlay_heatmap
-from auto_crop import auto_crop_ultrasound
+from auto_crop import detect_ultrasound_roi, auto_crop_ultrasound
 
 BASE_DIR = r"c:\Users\Rajasekar\OneDrive\Desktop\Liver Cirrhosis Detection"
 MODELS_DIR = os.path.join(BASE_DIR, "models")
@@ -40,11 +40,11 @@ app.add_middleware(
 
 # METAVIR Staging Metadata
 METAVIR_INFO = {
-    'F0': {'title': 'F0 · No Fibrosis', 'desc': 'Healthy liver architecture with standard parenchyma and no structural scarring.', 'color': '#E89A8A', 'badge': 'Low Risk'},
-    'F1': {'title': 'F1 · Portal Fibrosis', 'desc': 'Mild fibrous expansion localized within portal tracts, without septal formation.', 'color': '#D9A07B', 'badge': 'Mild Risk'},
-    'F2': {'title': 'F2 · Periportal Fibrosis', 'desc': 'Moderate fibrosis with portal expansion and rare periportal septa.', 'color': '#C4554B', 'badge': 'Moderate Risk'},
-    'F3': {'title': 'F3 · Septal Fibrosis', 'desc': 'Severe bridging fibrosis with numerous fibrous septa connecting portal areas.', 'color': '#A64B3B', 'badge': 'High Risk'},
-    'F4': {'title': 'F4 · Cirrhosis', 'desc': 'Advanced cirrhosis characterized by regenerative nodular architectural distortion.', 'color': '#732B25', 'badge': 'Critical Risk'}
+    'F0': {'title': 'F0 · No Fibrosis', 'desc': 'Healthy liver architecture with standard parenchyma and no structural scarring.', 'color': '#38BDF8', 'badge': 'Low Risk'},
+    'F1': {'title': 'F1 · Portal Fibrosis', 'desc': 'Mild fibrous expansion localized within portal tracts, without septal formation.', 'color': '#0EA5E9', 'badge': 'Mild Risk'},
+    'F2': {'title': 'F2 · Periportal Fibrosis', 'desc': 'Moderate fibrosis with portal expansion and rare periportal septa.', 'color': '#0284C7', 'badge': 'Moderate Risk'},
+    'F3': {'title': 'F3 · Septal Fibrosis', 'desc': 'Severe bridging fibrosis with numerous fibrous septa connecting portal areas.', 'color': '#2563EB', 'badge': 'High Risk'},
+    'F4': {'title': 'F4 · Cirrhosis', 'desc': 'Advanced cirrhosis characterized by regenerative nodular architectural distortion.', 'color': '#1E3A8A', 'badge': 'Critical Risk'}
 }
 
 # Model Loaders
@@ -119,9 +119,12 @@ async def predict_vision(
     if img_pil is None:
         raise HTTPException(status_code=400, detail="No ultrasound file chosen. Please upload an image.")
 
-    # Use original PIL image directly without spatial aspect distortion
-    img_processed = img_pil
-    input_tensor = preprocess_image(img_processed, is_train=False).unsqueeze(0)
+    # Detect ultrasound scan ROI within uploaded image or document page
+    roi_pil, bbox = detect_ultrasound_roi(img_pil)
+    x, y, w, h = bbox
+
+    # Preprocess ROI for model inference
+    input_tensor = preprocess_image(roi_pil, is_train=False).unsqueeze(0)
 
     with torch.no_grad():
         outputs = vision_model(input_tensor)
@@ -131,12 +134,20 @@ async def predict_vision(
         pred_stage = stages[pred_idx]
         confidence = float(probs[pred_idx] * 100)
 
+    # Compute Grad-CAM heatmap strictly on ultrasound ROI
     grad_cam = GradCAM(vision_model, vision_model.layer4)
     cam_mask, _ = grad_cam(input_tensor, target_category=pred_idx)
-    img_np = np.array(img_processed.resize((224, 224)))
-    overlay, _ = overlay_heatmap(img_np, cam_mask, alpha=opacity)
+    
+    # Overlay heatmap ON ROI ONLY
+    roi_np = np.array(roi_pil.resize((224, 224)))
+    overlay_roi, _ = overlay_heatmap(roi_np, cam_mask, alpha=opacity)
+    
+    # Resize overlay back to original ROI dimensions (w, h)
+    overlay_roi_pil = Image.fromarray(overlay_roi).resize((w, h))
 
-    overlay_pil = Image.fromarray(overlay)
+    # Paste overlay strictly into ROI location on full image canvas
+    full_overlay_img = img_pil.copy()
+    full_overlay_img.paste(overlay_roi_pil, (x, y))
     
     stage_probs = [{'stage': s, 'prob': float(probs[i] * 100)} for i, s in enumerate(stages)]
 
@@ -146,8 +157,8 @@ async def predict_vision(
         'confidence': round(confidence, 1),
         'meta': METAVIR_INFO[pred_stage],
         'stage_probs': stage_probs,
-        'original_b64': pil_to_base64(img_processed),
-        'overlay_b64': pil_to_base64(overlay_pil)
+        'original_b64': pil_to_base64(img_pil),
+        'overlay_b64': pil_to_base64(full_overlay_img)
     }
 
 @app.post("/api/predict-clinical")
