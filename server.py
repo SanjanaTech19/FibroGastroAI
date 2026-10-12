@@ -16,7 +16,8 @@ from fastapi.staticfiles import StaticFiles
 from fastapi.responses import HTMLResponse, FileResponse
 
 from resnet18_model import build_resnet18
-from train_vision_model import preprocess_image
+from preprocess import prepare_image
+from calibration import calibrate_probabilities, evaluate_prediction_confidence
 from gradcam import GradCAM, overlay_heatmap
 from auto_crop import detect_ultrasound_roi, auto_crop_ultrasound
 
@@ -50,11 +51,17 @@ METAVIR_INFO = {
 # Model Loaders
 def load_vision_model():
     model_path = os.path.join(MODELS_DIR, "resnet18_cirrhosis.pth")
+    if not os.path.exists(model_path):
+        return None, None
+    meta_path = os.path.join(MODELS_DIR, "model_metadata.json")
+    metadata = {}
+    if os.path.exists(meta_path):
+        with open(meta_path) as f:
+            metadata = json.load(f)
     model = build_resnet18(num_classes=5)
-    if os.path.exists(model_path):
-        model.load_state_dict(torch.load(model_path, map_location=torch.device('cpu')))
+    model.load_state_dict(torch.load(model_path, map_location=torch.device('cpu')))
     model.eval()
-    return model
+    return model, metadata
 
 def load_clinical_model():
     xgb_path = os.path.join(MODELS_DIR, "xgboost_clinical.pkl")
@@ -68,7 +75,7 @@ def load_clinical_model():
             preprocessor = pickle.load(f)
     return model, preprocessor
 
-vision_model = load_vision_model()
+vision_model, vision_metadata = load_vision_model()
 clinical_model, clinical_prep = load_clinical_model()
 
 def pil_to_base64(img_pil):
@@ -107,6 +114,12 @@ async def predict_vision(
     opacity: float = Form(0.45),
     file: UploadFile = File(None)
 ):
+    if vision_model is None:
+        raise HTTPException(
+            status_code=530,
+            detail="Vision model unavailable. Please train/load a validated model before making a prediction."
+        )
+
     img_pil = None
     img_name = "Uploaded Scan"
 
@@ -123,16 +136,17 @@ async def predict_vision(
     roi_pil, bbox = detect_ultrasound_roi(img_pil)
     x, y, w, h = bbox
 
-    # Preprocess ROI for model inference
-    input_tensor = preprocess_image(roi_pil, is_train=False).unsqueeze(0)
+    # Preprocess ROI using unified preprocessing function
+    input_tensor, _, _ = prepare_image(roi_pil, is_train=False)
+    input_tensor = input_tensor.unsqueeze(0)
 
+    stages = ['F0', 'F1', 'F2', 'F3', 'F4']
     with torch.no_grad():
-        outputs = vision_model(input_tensor)
-        probs = torch.softmax(outputs, dim=1).squeeze(0).numpy()
+        logits = vision_model(input_tensor).squeeze(0).numpy()
+        probs = calibrate_probabilities(logits, temperature=1.0)
         pred_idx = int(np.argmax(probs))
-        stages = ['F0', 'F1', 'F2', 'F3', 'F4']
         pred_stage = stages[pred_idx]
-        confidence = float(probs[pred_idx] * 100)
+        conf_eval = evaluate_prediction_confidence(probs, stages)
 
     # Compute Grad-CAM heatmap strictly on ultrasound ROI
     grad_cam = GradCAM(vision_model, vision_model.layer4)
@@ -153,12 +167,15 @@ async def predict_vision(
 
     return {
         'img_name': img_name,
-        'pred_stage': pred_stage,
-        'confidence': round(confidence, 1),
+        'pred_stage': pred_stage if conf_eval['confidence_status'] != 'Indeterminate / Low Confidence' else 'Indeterminate',
+        'display_label': conf_eval['indeterminate_label'] if conf_eval['confidence_status'] == 'Indeterminate / Low Confidence' else f"{METAVIR_INFO[pred_stage]['title']}",
+        'confidence': conf_eval['confidence_score'],
+        'confidence_status': conf_eval['confidence_status'],
         'meta': METAVIR_INFO[pred_stage],
         'stage_probs': stage_probs,
         'original_b64': pil_to_base64(img_pil),
-        'overlay_b64': pil_to_base64(full_overlay_img)
+        'overlay_b64': pil_to_base64(full_overlay_img),
+        'model_version': vision_metadata.get('model_name', 'ResNet18 METAVIR Classifier v2.0')
     }
 
 @app.post("/api/predict-clinical")

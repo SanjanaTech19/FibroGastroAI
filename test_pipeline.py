@@ -5,7 +5,7 @@ import pickle
 from PIL import Image
 
 from resnet18_model import build_resnet18
-from train_vision_model import preprocess_image
+from preprocess import prepare_image
 from gradcam import GradCAM, overlay_heatmap
 
 def test_system():
@@ -52,7 +52,8 @@ def test_system():
 
     # Create dummy ultrasound image
     dummy_img = Image.new('RGB', (224, 224), color=(128, 128, 128))
-    tensor = preprocess_image(dummy_img, is_train=False).unsqueeze(0)
+    tensor, _, _ = prepare_image(dummy_img, is_train=False)
+    tensor = tensor.unsqueeze(0)
 
     out = model_vision(tensor)
     pred_stage = torch.argmax(out, dim=1).item()

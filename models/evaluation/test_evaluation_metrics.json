@@ -1,0 +1,1593 @@
+{
+    "overall_metrics": {
+        "test_accuracy": 48.9,
+        "balanced_accuracy": 49.2,
+        "macro_f1": 50.43,
+        "total_test_samples": 182
+    },
+    "ordinal_metrics": {
+        "exact_stage_accuracy": 48.9,
+        "plus_minus_1_stage_accuracy": 79.12,
+        "severe_stage_f3_f4_sensitivity": 52.63,
+        "severe_stage_f3_f4_specificity": 67.92,
+        "f4_cirrhosis_sensitivity": 45.45,
+        "f4_cirrhosis_specificity": 95.3
+    },
+    "per_class_metrics": {
+        "F0": {
+            "sensitivity": 80.0,
+            "specificity": 98.68,
+            "precision": 92.31,
+            "recall": 80.0,
+            "f1_score": 85.71
+        },
+        "F1": {
+            "sensitivity": 21.88,
+            "specificity": 89.33,
+            "precision": 30.43,
+            "recall": 21.88,
+            "f1_score": 25.45
+        },
+        "F2": {
+            "sensitivity": 56.82,
+            "specificity": 75.36,
+            "precision": 42.37,
+            "recall": 56.82,
+            "f1_score": 48.54
+        },
+        "F3": {
+            "sensitivity": 41.86,
+            "specificity": 75.54,
+            "precision": 34.62,
+            "recall": 41.86,
+            "f1_score": 37.89
+        },
+        "F4": {
+            "sensitivity": 45.45,
+            "specificity": 95.3,
+            "precision": 68.18,
+            "recall": 45.45,
+            "f1_score": 54.55
+        }
+    },
+    "confusion_matrix": [
+        [
+            24,
+            5,
+            0,
+            0,
+            1
+        ],
+        [
+            0,
+            7,
+            8,
+            16,
+            1
+        ],
+        [
+            0,
+            3,
+            25,
+            15,
+            1
+        ],
+        [
+            0,
+            4,
+            17,
+            18,
+            4
+        ],
+        [
+            2,
+            4,
+            9,
+            3,
+            15
+        ]
+    ],
+    "classification_report": {
+        "F0": {
+            "precision": 0.9230769230769231,
+            "recall": 0.8,
+            "f1-score": 0.8571428571428571,
+            "support": 30.0
+        },
+        "F1": {
+            "precision": 0.30434782608695654,
+            "recall": 0.21875,
+            "f1-score": 0.2545454545454545,
+            "support": 32.0
+        },
+        "F2": {
+            "precision": 0.423728813559322,
+            "recall": 0.5681818181818182,
+            "f1-score": 0.4854368932038835,
+            "support": 44.0
+        },
+        "F3": {
+            "precision": 0.34615384615384615,
+            "recall": 0.4186046511627907,
+            "f1-score": 0.37894736842105264,
+            "support": 43.0
+        },
+        "F4": {
+            "precision": 0.6818181818181818,
+            "recall": 0.45454545454545453,
+            "f1-score": 0.5454545454545454,
+            "support": 33.0
+        },
+        "accuracy": 0.489010989010989,
+        "macro avg": {
+            "precision": 0.5358251181390459,
+            "recall": 0.4920163847780127,
+            "f1-score": 0.5043054237535587,
+            "support": 182.0
+        },
+        "weighted avg": {
+            "precision": 0.5135171500456915,
+            "recall": 0.489010989010989,
+            "f1-score": 0.49183351869679337,
+            "support": 182.0
+        }
+    },
+    "sample_predictions": [
+        {
+            "filename": "ct8-45.png",
+            "true_stage": "F3",
+            "pred_stage": "F3",
+            "confidence": 47.3,
+            "status": "Moderate Confidence",
+            "is_correct": true
+        },
+        {
+            "filename": "ct2-70.png",
+            "true_stage": "F1",
+            "pred_stage": "F2",
+            "confidence": 73.6,
+            "status": "High Confidence",
+            "is_correct": false
+        },
+        {
+            "filename": "f19.jpg",
+            "true_stage": "F4",
+            "pred_stage": "F4",
+            "confidence": 72.8,
+            "status": "High Confidence",
+            "is_correct": true
+        },
+        {
+            "filename": "ct2-13.png",
+            "true_stage": "F1",
+            "pred_stage": "F2",
+            "confidence": 35.5,
+            "status": "Indeterminate / Low Confidence",
+            "is_correct": false
+        },
+        {
+            "filename": "ct2-67.png",
+            "true_stage": "F1",
+            "pred_stage": "F2",
+            "confidence": 32.4,
+            "status": "Indeterminate / Low Confidence",
+            "is_correct": false
+        },
+        {
+            "filename": "ct11-14.png",
+            "true_stage": "F3",
+            "pred_stage": "F3",
+            "confidence": 39.7,
+            "status": "Indeterminate / Low Confidence",
+            "is_correct": true
+        },
+        {
+            "filename": "ct7-59.png",
+            "true_stage": "F2",
+            "pred_stage": "F2",
+            "confidence": 39.2,
+            "status": "Indeterminate / Low Confidence",
+            "is_correct": true
+        },
+        {
+            "filename": "ct1-40.png",
+            "true_stage": "F1",
+            "pred_stage": "F3",
+            "confidence": 38.7,
+            "status": "Indeterminate / Low Confidence",
+            "is_correct": false
+        },
+        {
+            "filename": "B5559.jpg",
+            "true_stage": "F1",
+            "pred_stage": "F2",
+            "confidence": 38.6,
+            "status": "Indeterminate / Low Confidence",
+            "is_correct": false
+        },
+        {
+            "filename": "a20.jpg",
+            "true_stage": "F1",
+            "pred_stage": "F1",
+            "confidence": 82.4,
+            "status": "High Confidence",
+            "is_correct": true
+        },
+        {
+            "filename": "ct11-37.png",
+            "true_stage": "F3",
+            "pred_stage": "F2",
+            "confidence": 54.0,
+            "status": "Moderate Confidence",
+            "is_correct": false
+        },
+        {
+            "filename": "e45.jpg",
+            "true_stage": "F4",
+            "pred_stage": "F4",
+            "confidence": 82.8,
+            "status": "High Confidence",
+            "is_correct": true
+        },
+        {
+            "filename": "ct4-25.png",
+            "true_stage": "F2",
+            "pred_stage": "F1",
+            "confidence": 37.5,
+            "status": "Indeterminate / Low Confidence",
+            "is_correct": false
+        },
+        {
+            "filename": "a155.jpg",
+            "true_stage": "F0",
+            "pred_stage": "F0",
+            "confidence": 83.2,
+            "status": "High Confidence",
+            "is_correct": true
+        },
+        {
+            "filename": "ct12-51.png",
+            "true_stage": "F4",
+            "pred_stage": "F2",
+            "confidence": 46.3,
+            "status": "Moderate Confidence",
+            "is_correct": false
+        },
+        {
+            "filename": "ct1-14.png",
+            "true_stage": "F1",
+            "pred_stage": "F3",
+            "confidence": 38.3,
+            "status": "Indeterminate / Low Confidence",
+            "is_correct": false
+        },
+        {
+            "filename": "ct15-8.png",
+            "true_stage": "F4",
+            "pred_stage": "F3",
+            "confidence": 63.2,
+            "status": "Moderate Confidence",
+            "is_correct": false
+        },
+        {
+            "filename": "a2775.jpg",
+            "true_stage": "F0",
+            "pred_stage": "F0",
+            "confidence": 89.2,
+            "status": "High Confidence",
+            "is_correct": true
+        },
+        {
+            "filename": "ct4-42.png",
+            "true_stage": "F2",
+            "pred_stage": "F2",
+            "confidence": 42.1,
+            "status": "Indeterminate / Low Confidence",
+            "is_correct": true
+        },
+        {
+            "filename": "ct11-42.png",
+            "true_stage": "F3",
+            "pred_stage": "F1",
+            "confidence": 32.4,
+            "status": "Indeterminate / Low Confidence",
+            "is_correct": false
+        },
+        {
+            "filename": "ct9-52.png",
+            "true_stage": "F3",
+            "pred_stage": "F2",
+            "confidence": 54.2,
+            "status": "Moderate Confidence",
+            "is_correct": false
+        },
+        {
+            "filename": "ct11-22.png",
+            "true_stage": "F3",
+            "pred_stage": "F2",
+            "confidence": 44.0,
+            "status": "Indeterminate / Low Confidence",
+            "is_correct": false
+        },
+        {
+            "filename": "ct7-31.png",
+            "true_stage": "F2",
+            "pred_stage": "F3",
+            "confidence": 56.8,
+            "status": "Moderate Confidence",
+            "is_correct": false
+        },
+        {
+            "filename": "ct5-66.png",
+            "true_stage": "F2",
+            "pred_stage": "F2",
+            "confidence": 45.3,
+            "status": "Moderate Confidence",
+            "is_correct": true
+        },
+        {
+            "filename": "ct8-22.png",
+            "true_stage": "F2",
+            "pred_stage": "F3",
+            "confidence": 57.8,
+            "status": "Moderate Confidence",
+            "is_correct": false
+        },
+        {
+            "filename": "ct9-45.png",
+            "true_stage": "F3",
+            "pred_stage": "F3",
+            "confidence": 45.4,
+            "status": "Moderate Confidence",
+            "is_correct": true
+        },
+        {
+            "filename": "ct1-13.png",
+            "true_stage": "F1",
+            "pred_stage": "F3",
+            "confidence": 76.8,
+            "status": "High Confidence",
+            "is_correct": false
+        },
+        {
+            "filename": "ct3-1.png",
+            "true_stage": "F1",
+            "pred_stage": "F1",
+            "confidence": 37.0,
+            "status": "Indeterminate / Low Confidence",
+            "is_correct": true
+        },
+        {
+            "filename": "ct3-53.png",
+            "true_stage": "F2",
+            "pred_stage": "F3",
+            "confidence": 42.2,
+            "status": "Indeterminate / Low Confidence",
+            "is_correct": false
+        },
+        {
+            "filename": "f39.jpg",
+            "true_stage": "F4",
+            "pred_stage": "F4",
+            "confidence": 79.7,
+            "status": "High Confidence",
+            "is_correct": true
+        },
+        {
+            "filename": "ct7-61.png",
+            "true_stage": "F2",
+            "pred_stage": "F2",
+            "confidence": 35.9,
+            "status": "Indeterminate / Low Confidence",
+            "is_correct": true
+        },
+        {
+            "filename": "ct4-52.png",
+            "true_stage": "F2",
+            "pred_stage": "F4",
+            "confidence": 28.6,
+            "status": "Indeterminate / Low Confidence",
+            "is_correct": false
+        },
+        {
+            "filename": "ct11-59.png",
+            "true_stage": "F3",
+            "pred_stage": "F2",
+            "confidence": 49.6,
+            "status": "Moderate Confidence",
+            "is_correct": false
+        },
+        {
+            "filename": "ct11-15.png",
+            "true_stage": "F3",
+            "pred_stage": "F1",
+            "confidence": 31.6,
+            "status": "Indeterminate / Low Confidence",
+            "is_correct": false
+        },
+        {
+            "filename": "ct9-31.png",
+            "true_stage": "F3",
+            "pred_stage": "F3",
+            "confidence": 60.1,
+            "status": "Moderate Confidence",
+            "is_correct": true
+        },
+        {
+            "filename": "ct11-12.png",
+            "true_stage": "F3",
+            "pred_stage": "F2",
+            "confidence": 50.1,
+            "status": "Moderate Confidence",
+            "is_correct": false
+        },
+        {
+            "filename": "ct9-74.png",
+            "true_stage": "F3",
+            "pred_stage": "F3",
+            "confidence": 52.0,
+            "status": "Moderate Confidence",
+            "is_correct": true
+        },
+        {
+            "filename": "ct4-69.png",
+            "true_stage": "F2",
+            "pred_stage": "F2",
+            "confidence": 68.7,
+            "status": "Moderate Confidence",
+            "is_correct": true
+        },
+        {
+            "filename": "ct1-66.png",
+            "true_stage": "F1",
+            "pred_stage": "F3",
+            "confidence": 37.1,
+            "status": "Indeterminate / Low Confidence",
+            "is_correct": false
+        },
+        {
+            "filename": "ct4-74.png",
+            "true_stage": "F2",
+            "pred_stage": "F2",
+            "confidence": 44.5,
+            "status": "Indeterminate / Low Confidence",
+            "is_correct": true
+        },
+        {
+            "filename": "a4896.jpg",
+            "true_stage": "F0",
+            "pred_stage": "F0",
+            "confidence": 71.8,
+            "status": "High Confidence",
+            "is_correct": true
+        },
+        {
+            "filename": "ct9-37.png",
+            "true_stage": "F3",
+            "pred_stage": "F2",
+            "confidence": 58.0,
+            "status": "Moderate Confidence",
+            "is_correct": false
+        },
+        {
+            "filename": "ct8-54.png",
+            "true_stage": "F3",
+            "pred_stage": "F3",
+            "confidence": 33.8,
+            "status": "Indeterminate / Low Confidence",
+            "is_correct": true
+        },
+        {
+            "filename": "ct11-21.png",
+            "true_stage": "F3",
+            "pred_stage": "F2",
+            "confidence": 38.8,
+            "status": "Indeterminate / Low Confidence",
+            "is_correct": false
+        },
+        {
+            "filename": "ct14-27.png",
+            "true_stage": "F4",
+            "pred_stage": "F1",
+            "confidence": 42.1,
+            "status": "Indeterminate / Low Confidence",
+            "is_correct": false
+        },
+        {
+            "filename": "a218.jpg",
+            "true_stage": "F0",
+            "pred_stage": "F1",
+            "confidence": 55.5,
+            "status": "Moderate Confidence",
+            "is_correct": false
+        },
+        {
+            "filename": "b4959.jpg",
+            "true_stage": "F1",
+            "pred_stage": "F3",
+            "confidence": 46.2,
+            "status": "Moderate Confidence",
+            "is_correct": false
+        },
+        {
+            "filename": "ct5-14.png",
+            "true_stage": "F2",
+            "pred_stage": "F2",
+            "confidence": 54.1,
+            "status": "Moderate Confidence",
+            "is_correct": true
+        },
+        {
+            "filename": "ct9-39.png",
+            "true_stage": "F3",
+            "pred_stage": "F3",
+            "confidence": 50.9,
+            "status": "Moderate Confidence",
+            "is_correct": true
+        },
+        {
+            "filename": "ct10-61.png",
+            "true_stage": "F3",
+            "pred_stage": "F2",
+            "confidence": 41.6,
+            "status": "Indeterminate / Low Confidence",
+            "is_correct": false
+        },
+        {
+            "filename": "ct11-18.png",
+            "true_stage": "F3",
+            "pred_stage": "F2",
+            "confidence": 63.1,
+            "status": "Moderate Confidence",
+            "is_correct": false
+        },
+        {
+            "filename": "a273.jpg",
+            "true_stage": "F0",
+            "pred_stage": "F0",
+            "confidence": 86.5,
+            "status": "High Confidence",
+            "is_correct": true
+        },
+        {
+            "filename": "ct14-53.png",
+            "true_stage": "F4",
+            "pred_stage": "F2",
+            "confidence": 49.7,
+            "status": "Moderate Confidence",
+            "is_correct": false
+        },
+        {
+            "filename": "a1698.jpg",
+            "true_stage": "F0",
+            "pred_stage": "F0",
+            "confidence": 88.8,
+            "status": "High Confidence",
+            "is_correct": true
+        },
+        {
+            "filename": "e34.jpg",
+            "true_stage": "F4",
+            "pred_stage": "F4",
+            "confidence": 94.4,
+            "status": "High Confidence",
+            "is_correct": true
+        },
+        {
+            "filename": "a1051.jpg",
+            "true_stage": "F0",
+            "pred_stage": "F0",
+            "confidence": 97.3,
+            "status": "High Confidence",
+            "is_correct": true
+        },
+        {
+            "filename": "ct3-44.png",
+            "true_stage": "F2",
+            "pred_stage": "F1",
+            "confidence": 51.7,
+            "status": "Moderate Confidence",
+            "is_correct": false
+        },
+        {
+            "filename": "ct3-13.png",
+            "true_stage": "F1",
+            "pred_stage": "F3",
+            "confidence": 50.0,
+            "status": "Moderate Confidence",
+            "is_correct": false
+        },
+        {
+            "filename": "ct5-2.png",
+            "true_stage": "F2",
+            "pred_stage": "F3",
+            "confidence": 53.3,
+            "status": "Moderate Confidence",
+            "is_correct": false
+        },
+        {
+            "filename": "ct10-47.png",
+            "true_stage": "F3",
+            "pred_stage": "F2",
+            "confidence": 40.8,
+            "status": "Indeterminate / Low Confidence",
+            "is_correct": false
+        },
+        {
+            "filename": "ct11-23.png",
+            "true_stage": "F3",
+            "pred_stage": "F2",
+            "confidence": 46.6,
+            "status": "Moderate Confidence",
+            "is_correct": false
+        },
+        {
+            "filename": "ct12-12.png",
+            "true_stage": "F3",
+            "pred_stage": "F1",
+            "confidence": 37.2,
+            "status": "Indeterminate / Low Confidence",
+            "is_correct": false
+        },
+        {
+            "filename": "a1737.jpg",
+            "true_stage": "F0",
+            "pred_stage": "F0",
+            "confidence": 45.0,
+            "status": "Indeterminate / Low Confidence",
+            "is_correct": true
+        },
+        {
+            "filename": "a317.jpg",
+            "true_stage": "F0",
+            "pred_stage": "F0",
+            "confidence": 89.4,
+            "status": "High Confidence",
+            "is_correct": true
+        },
+        {
+            "filename": "ct1-16.png",
+            "true_stage": "F1",
+            "pred_stage": "F3",
+            "confidence": 61.8,
+            "status": "Moderate Confidence",
+            "is_correct": false
+        },
+        {
+            "filename": "ct5-27.png",
+            "true_stage": "F2",
+            "pred_stage": "F3",
+            "confidence": 43.5,
+            "status": "Indeterminate / Low Confidence",
+            "is_correct": false
+        },
+        {
+            "filename": "a1251.jpg",
+            "true_stage": "F0",
+            "pred_stage": "F1",
+            "confidence": 70.6,
+            "status": "High Confidence",
+            "is_correct": false
+        },
+        {
+            "filename": "f20.jpg",
+            "true_stage": "F4",
+            "pred_stage": "F1",
+            "confidence": 69.1,
+            "status": "Moderate Confidence",
+            "is_correct": false
+        },
+        {
+            "filename": "ct7-58.png",
+            "true_stage": "F2",
+            "pred_stage": "F3",
+            "confidence": 45.6,
+            "status": "Moderate Confidence",
+            "is_correct": false
+        },
+        {
+            "filename": "ct4-64.png",
+            "true_stage": "F2",
+            "pred_stage": "F1",
+            "confidence": 35.4,
+            "status": "Indeterminate / Low Confidence",
+            "is_correct": false
+        },
+        {
+            "filename": "e22.jpg",
+            "true_stage": "F4",
+            "pred_stage": "F0",
+            "confidence": 49.6,
+            "status": "Moderate Confidence",
+            "is_correct": false
+        },
+        {
+            "filename": "a2231.jpg",
+            "true_stage": "F0",
+            "pred_stage": "F0",
+            "confidence": 95.1,
+            "status": "High Confidence",
+            "is_correct": true
+        },
+        {
+            "filename": "ct1-36.png",
+            "true_stage": "F1",
+            "pred_stage": "F4",
+            "confidence": 38.9,
+            "status": "Indeterminate / Low Confidence",
+            "is_correct": false
+        },
+        {
+            "filename": "ct7-9.png",
+            "true_stage": "F2",
+            "pred_stage": "F2",
+            "confidence": 44.7,
+            "status": "Indeterminate / Low Confidence",
+            "is_correct": true
+        },
+        {
+            "filename": "ct5-76.png",
+            "true_stage": "F2",
+            "pred_stage": "F2",
+            "confidence": 46.9,
+            "status": "Moderate Confidence",
+            "is_correct": true
+        },
+        {
+            "filename": "C5666.jpg",
+            "true_stage": "F1",
+            "pred_stage": "F3",
+            "confidence": 31.4,
+            "status": "Indeterminate / Low Confidence",
+            "is_correct": false
+        },
+        {
+            "filename": "ct4-6.png",
+            "true_stage": "F2",
+            "pred_stage": "F3",
+            "confidence": 40.9,
+            "status": "Indeterminate / Low Confidence",
+            "is_correct": false
+        },
+        {
+            "filename": "c27.jpg",
+            "true_stage": "F1",
+            "pred_stage": "F1",
+            "confidence": 57.2,
+            "status": "Moderate Confidence",
+            "is_correct": true
+        },
+        {
+            "filename": "ct5-79.png",
+            "true_stage": "F2",
+            "pred_stage": "F3",
+            "confidence": 53.1,
+            "status": "Moderate Confidence",
+            "is_correct": false
+        },
+        {
+            "filename": "a1924.jpg",
+            "true_stage": "F0",
+            "pred_stage": "F0",
+            "confidence": 78.9,
+            "status": "High Confidence",
+            "is_correct": true
+        },
+        {
+            "filename": "ct8-63.png",
+            "true_stage": "F3",
+            "pred_stage": "F3",
+            "confidence": 42.6,
+            "status": "Indeterminate / Low Confidence",
+            "is_correct": true
+        },
+        {
+            "filename": "ct1-37.png",
+            "true_stage": "F1",
+            "pred_stage": "F3",
+            "confidence": 55.2,
+            "status": "Moderate Confidence",
+            "is_correct": false
+        },
+        {
+            "filename": "a18.jpg",
+            "true_stage": "F1",
+            "pred_stage": "F1",
+            "confidence": 76.5,
+            "status": "High Confidence",
+            "is_correct": true
+        },
+        {
+            "filename": "ct11-71.png",
+            "true_stage": "F3",
+            "pred_stage": "F4",
+            "confidence": 32.8,
+            "status": "Indeterminate / Low Confidence",
+            "is_correct": false
+        },
+        {
+            "filename": "ct8-5.png",
+            "true_stage": "F2",
+            "pred_stage": "F3",
+            "confidence": 56.2,
+            "status": "Moderate Confidence",
+            "is_correct": false
+        },
+        {
+            "filename": "d36.jpg",
+            "true_stage": "F4",
+            "pred_stage": "F4",
+            "confidence": 78.6,
+            "status": "High Confidence",
+            "is_correct": true
+        },
+        {
+            "filename": "ct7-34.png",
+            "true_stage": "F2",
+            "pred_stage": "F2",
+            "confidence": 40.3,
+            "status": "Indeterminate / Low Confidence",
+            "is_correct": true
+        },
+        {
+            "filename": "a2171.jpg",
+            "true_stage": "F0",
+            "pred_stage": "F0",
+            "confidence": 78.0,
+            "status": "High Confidence",
+            "is_correct": true
+        },
+        {
+            "filename": "a2465.jpg",
+            "true_stage": "F0",
+            "pred_stage": "F0",
+            "confidence": 94.3,
+            "status": "High Confidence",
+            "is_correct": true
+        },
+        {
+            "filename": "ct14-8.png",
+            "true_stage": "F4",
+            "pred_stage": "F2",
+            "confidence": 66.0,
+            "status": "Moderate Confidence",
+            "is_correct": false
+        },
+        {
+            "filename": "ct12-16.png",
+            "true_stage": "F3",
+            "pred_stage": "F4",
+            "confidence": 42.9,
+            "status": "Indeterminate / Low Confidence",
+            "is_correct": false
+        },
+        {
+            "filename": "ct4-61.png",
+            "true_stage": "F2",
+            "pred_stage": "F2",
+            "confidence": 50.7,
+            "status": "Moderate Confidence",
+            "is_correct": true
+        },
+        {
+            "filename": "ct14-54.png",
+            "true_stage": "F4",
+            "pred_stage": "F2",
+            "confidence": 31.4,
+            "status": "Indeterminate / Low Confidence",
+            "is_correct": false
+        },
+        {
+            "filename": "a1874.jpg",
+            "true_stage": "F0",
+            "pred_stage": "F1",
+            "confidence": 69.3,
+            "status": "Moderate Confidence",
+            "is_correct": false
+        },
+        {
+            "filename": "ct2-68.png",
+            "true_stage": "F1",
+            "pred_stage": "F2",
+            "confidence": 41.1,
+            "status": "Indeterminate / Low Confidence",
+            "is_correct": false
+        },
+        {
+            "filename": "ct5-41.png",
+            "true_stage": "F2",
+            "pred_stage": "F2",
+            "confidence": 69.0,
+            "status": "Moderate Confidence",
+            "is_correct": true
+        },
+        {
+            "filename": "ct14-19.png",
+            "true_stage": "F4",
+            "pred_stage": "F3",
+            "confidence": 28.5,
+            "status": "Indeterminate / Low Confidence",
+            "is_correct": false
+        },
+        {
+            "filename": "e31.jpg",
+            "true_stage": "F4",
+            "pred_stage": "F4",
+            "confidence": 96.5,
+            "status": "High Confidence",
+            "is_correct": true
+        },
+        {
+            "filename": "ct7-50.png",
+            "true_stage": "F2",
+            "pred_stage": "F2",
+            "confidence": 50.6,
+            "status": "Moderate Confidence",
+            "is_correct": true
+        },
+        {
+            "filename": "ct14-44.png",
+            "true_stage": "F4",
+            "pred_stage": "F2",
+            "confidence": 35.9,
+            "status": "Indeterminate / Low Confidence",
+            "is_correct": false
+        },
+        {
+            "filename": "ct10-62.png",
+            "true_stage": "F3",
+            "pred_stage": "F3",
+            "confidence": 43.1,
+            "status": "Indeterminate / Low Confidence",
+            "is_correct": true
+        },
+        {
+            "filename": "ct5-16.png",
+            "true_stage": "F2",
+            "pred_stage": "F2",
+            "confidence": 46.5,
+            "status": "Moderate Confidence",
+            "is_correct": true
+        },
+        {
+            "filename": "ct8-53.png",
+            "true_stage": "F3",
+            "pred_stage": "F3",
+            "confidence": 31.0,
+            "status": "Indeterminate / Low Confidence",
+            "is_correct": true
+        },
+        {
+            "filename": "ct5-32.png",
+            "true_stage": "F2",
+            "pred_stage": "F3",
+            "confidence": 42.4,
+            "status": "Indeterminate / Low Confidence",
+            "is_correct": false
+        },
+        {
+            "filename": "ct11-63.png",
+            "true_stage": "F3",
+            "pred_stage": "F2",
+            "confidence": 51.3,
+            "status": "Moderate Confidence",
+            "is_correct": false
+        },
+        {
+            "filename": "ct1-74.png",
+            "true_stage": "F1",
+            "pred_stage": "F3",
+            "confidence": 38.9,
+            "status": "Indeterminate / Low Confidence",
+            "is_correct": false
+        },
+        {
+            "filename": "b4047.jpg",
+            "true_stage": "F1",
+            "pred_stage": "F3",
+            "confidence": 49.0,
+            "status": "Moderate Confidence",
+            "is_correct": false
+        },
+        {
+            "filename": "d1.jpg",
+            "true_stage": "F4",
+            "pred_stage": "F4",
+            "confidence": 75.8,
+            "status": "High Confidence",
+            "is_correct": true
+        },
+        {
+            "filename": "a14.jpg",
+            "true_stage": "F1",
+            "pred_stage": "F1",
+            "confidence": 89.2,
+            "status": "High Confidence",
+            "is_correct": true
+        },
+        {
+            "filename": "ct8-16.png",
+            "true_stage": "F2",
+            "pred_stage": "F3",
+            "confidence": 31.2,
+            "status": "Indeterminate / Low Confidence",
+            "is_correct": false
+        },
+        {
+            "filename": "d5.jpg",
+            "true_stage": "F4",
+            "pred_stage": "F4",
+            "confidence": 71.2,
+            "status": "High Confidence",
+            "is_correct": true
+        },
+        {
+            "filename": "a3025.jpg",
+            "true_stage": "F0",
+            "pred_stage": "F4",
+            "confidence": 43.0,
+            "status": "Indeterminate / Low Confidence",
+            "is_correct": false
+        },
+        {
+            "filename": "ct2-16.png",
+            "true_stage": "F1",
+            "pred_stage": "F3",
+            "confidence": 36.9,
+            "status": "Indeterminate / Low Confidence",
+            "is_correct": false
+        },
+        {
+            "filename": "ct4-17.png",
+            "true_stage": "F2",
+            "pred_stage": "F3",
+            "confidence": 35.6,
+            "status": "Indeterminate / Low Confidence",
+            "is_correct": false
+        },
+        {
+            "filename": "ct8-34.png",
+            "true_stage": "F2",
+            "pred_stage": "F2",
+            "confidence": 60.0,
+            "status": "Moderate Confidence",
+            "is_correct": true
+        },
+        {
+            "filename": "g22.jpg",
+            "true_stage": "F4",
+            "pred_stage": "F4",
+            "confidence": 62.3,
+            "status": "Moderate Confidence",
+            "is_correct": true
+        },
+        {
+            "filename": "ct10-48.png",
+            "true_stage": "F3",
+            "pred_stage": "F3",
+            "confidence": 34.3,
+            "status": "Indeterminate / Low Confidence",
+            "is_correct": true
+        },
+        {
+            "filename": "ct15-20.png",
+            "true_stage": "F4",
+            "pred_stage": "F4",
+            "confidence": 56.4,
+            "status": "Moderate Confidence",
+            "is_correct": true
+        },
+        {
+            "filename": "ct5-35.png",
+            "true_stage": "F2",
+            "pred_stage": "F3",
+            "confidence": 52.4,
+            "status": "Moderate Confidence",
+            "is_correct": false
+        },
+        {
+            "filename": "ct10-70.png",
+            "true_stage": "F3",
+            "pred_stage": "F2",
+            "confidence": 42.6,
+            "status": "Indeterminate / Low Confidence",
+            "is_correct": false
+        },
+        {
+            "filename": "d35.jpg",
+            "true_stage": "F4",
+            "pred_stage": "F4",
+            "confidence": 51.3,
+            "status": "Moderate Confidence",
+            "is_correct": true
+        },
+        {
+            "filename": "a157.jpg",
+            "true_stage": "F0",
+            "pred_stage": "F0",
+            "confidence": 86.0,
+            "status": "High Confidence",
+            "is_correct": true
+        },
+        {
+            "filename": "ct14-18.png",
+            "true_stage": "F4",
+            "pred_stage": "F2",
+            "confidence": 41.9,
+            "status": "Indeterminate / Low Confidence",
+            "is_correct": false
+        },
+        {
+            "filename": "ct1-61.png",
+            "true_stage": "F1",
+            "pred_stage": "F2",
+            "confidence": 48.3,
+            "status": "Moderate Confidence",
+            "is_correct": false
+        },
+        {
+            "filename": "e21.jpg",
+            "true_stage": "F4",
+            "pred_stage": "F0",
+            "confidence": 61.8,
+            "status": "Moderate Confidence",
+            "is_correct": false
+        },
+        {
+            "filename": "a255.jpg",
+            "true_stage": "F0",
+            "pred_stage": "F0",
+            "confidence": 68.5,
+            "status": "Moderate Confidence",
+            "is_correct": true
+        },
+        {
+            "filename": "a1375.jpg",
+            "true_stage": "F0",
+            "pred_stage": "F0",
+            "confidence": 95.6,
+            "status": "High Confidence",
+            "is_correct": true
+        },
+        {
+            "filename": "ct5-3.png",
+            "true_stage": "F2",
+            "pred_stage": "F2",
+            "confidence": 49.3,
+            "status": "Moderate Confidence",
+            "is_correct": true
+        },
+        {
+            "filename": "ct12-24.png",
+            "true_stage": "F3",
+            "pred_stage": "F3",
+            "confidence": 64.2,
+            "status": "Moderate Confidence",
+            "is_correct": true
+        },
+        {
+            "filename": "a4193.jpg",
+            "true_stage": "F0",
+            "pred_stage": "F0",
+            "confidence": 95.7,
+            "status": "High Confidence",
+            "is_correct": true
+        },
+        {
+            "filename": "a191.jpg",
+            "true_stage": "F0",
+            "pred_stage": "F1",
+            "confidence": 65.6,
+            "status": "Moderate Confidence",
+            "is_correct": false
+        },
+        {
+            "filename": "ct4-34.png",
+            "true_stage": "F2",
+            "pred_stage": "F2",
+            "confidence": 35.4,
+            "status": "Indeterminate / Low Confidence",
+            "is_correct": true
+        },
+        {
+            "filename": "ct14-59.png",
+            "true_stage": "F4",
+            "pred_stage": "F2",
+            "confidence": 50.9,
+            "status": "Moderate Confidence",
+            "is_correct": false
+        },
+        {
+            "filename": "ct14-61.png",
+            "true_stage": "F4",
+            "pred_stage": "F2",
+            "confidence": 54.2,
+            "status": "Moderate Confidence",
+            "is_correct": false
+        },
+        {
+            "filename": "ct4-21.png",
+            "true_stage": "F2",
+            "pred_stage": "F3",
+            "confidence": 41.0,
+            "status": "Indeterminate / Low Confidence",
+            "is_correct": false
+        },
+        {
+            "filename": "ct12-41.png",
+            "true_stage": "F3",
+            "pred_stage": "F3",
+            "confidence": 39.0,
+            "status": "Indeterminate / Low Confidence",
+            "is_correct": true
+        },
+        {
+            "filename": "ct9-22.png",
+            "true_stage": "F3",
+            "pred_stage": "F2",
+            "confidence": 51.9,
+            "status": "Moderate Confidence",
+            "is_correct": false
+        },
+        {
+            "filename": "ct2-52.png",
+            "true_stage": "F1",
+            "pred_stage": "F3",
+            "confidence": 49.6,
+            "status": "Moderate Confidence",
+            "is_correct": false
+        },
+        {
+            "filename": "ct12-40.png",
+            "true_stage": "F3",
+            "pred_stage": "F4",
+            "confidence": 36.6,
+            "status": "Indeterminate / Low Confidence",
+            "is_correct": false
+        },
+        {
+            "filename": "a22.jpg",
+            "true_stage": "F1",
+            "pred_stage": "F1",
+            "confidence": 83.6,
+            "status": "High Confidence",
+            "is_correct": true
+        },
+        {
+            "filename": "C7912.jpg",
+            "true_stage": "F1",
+            "pred_stage": "F3",
+            "confidence": 39.0,
+            "status": "Indeterminate / Low Confidence",
+            "is_correct": false
+        },
+        {
+            "filename": "a13.jpg",
+            "true_stage": "F1",
+            "pred_stage": "F1",
+            "confidence": 94.7,
+            "status": "High Confidence",
+            "is_correct": true
+        },
+        {
+            "filename": "ct9-58.png",
+            "true_stage": "F3",
+            "pred_stage": "F2",
+            "confidence": 43.7,
+            "status": "Indeterminate / Low Confidence",
+            "is_correct": false
+        },
+        {
+            "filename": "a219.jpg",
+            "true_stage": "F0",
+            "pred_stage": "F0",
+            "confidence": 98.0,
+            "status": "High Confidence",
+            "is_correct": true
+        },
+        {
+            "filename": "ct15-42.png",
+            "true_stage": "F4",
+            "pred_stage": "F2",
+            "confidence": 53.2,
+            "status": "Moderate Confidence",
+            "is_correct": false
+        },
+        {
+            "filename": "A512.jpg",
+            "true_stage": "F4",
+            "pred_stage": "F4",
+            "confidence": 58.4,
+            "status": "Moderate Confidence",
+            "is_correct": true
+        },
+        {
+            "filename": "ct7-51.png",
+            "true_stage": "F2",
+            "pred_stage": "F3",
+            "confidence": 77.0,
+            "status": "High Confidence",
+            "is_correct": false
+        },
+        {
+            "filename": "ct10-19.png",
+            "true_stage": "F3",
+            "pred_stage": "F1",
+            "confidence": 36.2,
+            "status": "Indeterminate / Low Confidence",
+            "is_correct": false
+        },
+        {
+            "filename": "ct9-8.png",
+            "true_stage": "F3",
+            "pred_stage": "F3",
+            "confidence": 52.2,
+            "status": "Moderate Confidence",
+            "is_correct": true
+        },
+        {
+            "filename": "ct8-38.png",
+            "true_stage": "F3",
+            "pred_stage": "F2",
+            "confidence": 42.9,
+            "status": "Indeterminate / Low Confidence",
+            "is_correct": false
+        },
+        {
+            "filename": "ct7-3.png",
+            "true_stage": "F2",
+            "pred_stage": "F2",
+            "confidence": 50.4,
+            "status": "Moderate Confidence",
+            "is_correct": true
+        },
+        {
+            "filename": "ct3-22.png",
+            "true_stage": "F1",
+            "pred_stage": "F3",
+            "confidence": 52.4,
+            "status": "Moderate Confidence",
+            "is_correct": false
+        },
+        {
+            "filename": "ct11-43.png",
+            "true_stage": "F3",
+            "pred_stage": "F3",
+            "confidence": 39.7,
+            "status": "Indeterminate / Low Confidence",
+            "is_correct": true
+        },
+        {
+            "filename": "a1437.jpg",
+            "true_stage": "F0",
+            "pred_stage": "F0",
+            "confidence": 59.1,
+            "status": "Moderate Confidence",
+            "is_correct": true
+        },
+        {
+            "filename": "a3283.jpg",
+            "true_stage": "F0",
+            "pred_stage": "F0",
+            "confidence": 52.1,
+            "status": "Moderate Confidence",
+            "is_correct": true
+        },
+        {
+            "filename": "ct4-90.png",
+            "true_stage": "F2",
+            "pred_stage": "F2",
+            "confidence": 51.7,
+            "status": "Moderate Confidence",
+            "is_correct": true
+        },
+        {
+            "filename": "ct10-68.png",
+            "true_stage": "F3",
+            "pred_stage": "F2",
+            "confidence": 41.0,
+            "status": "Indeterminate / Low Confidence",
+            "is_correct": false
+        },
+        {
+            "filename": "C7809.jpg",
+            "true_stage": "F3",
+            "pred_stage": "F3",
+            "confidence": 40.3,
+            "status": "Indeterminate / Low Confidence",
+            "is_correct": true
+        },
+        {
+            "filename": "ct8-25.png",
+            "true_stage": "F2",
+            "pred_stage": "F2",
+            "confidence": 59.2,
+            "status": "Moderate Confidence",
+            "is_correct": true
+        },
+        {
+            "filename": "a188.jpg",
+            "true_stage": "F0",
+            "pred_stage": "F0",
+            "confidence": 67.9,
+            "status": "Moderate Confidence",
+            "is_correct": true
+        },
+        {
+            "filename": "ct12-30.png",
+            "true_stage": "F3",
+            "pred_stage": "F3",
+            "confidence": 37.9,
+            "status": "Indeterminate / Low Confidence",
+            "is_correct": true
+        },
+        {
+            "filename": "ct5-68.png",
+            "true_stage": "F2",
+            "pred_stage": "F2",
+            "confidence": 41.9,
+            "status": "Indeterminate / Low Confidence",
+            "is_correct": true
+        },
+        {
+            "filename": "ct10-9.png",
+            "true_stage": "F3",
+            "pred_stage": "F4",
+            "confidence": 61.0,
+            "status": "Moderate Confidence",
+            "is_correct": false
+        },
+        {
+            "filename": "ct5-18.png",
+            "true_stage": "F2",
+            "pred_stage": "F2",
+            "confidence": 41.3,
+            "status": "Indeterminate / Low Confidence",
+            "is_correct": true
+        },
+        {
+            "filename": "ct2-29.png",
+            "true_stage": "F1",
+            "pred_stage": "F2",
+            "confidence": 35.2,
+            "status": "Indeterminate / Low Confidence",
+            "is_correct": false
+        },
+        {
+            "filename": "d29.jpg",
+            "true_stage": "F4",
+            "pred_stage": "F4",
+            "confidence": 46.5,
+            "status": "Moderate Confidence",
+            "is_correct": true
+        },
+        {
+            "filename": "a1369.jpg",
+            "true_stage": "F0",
+            "pred_stage": "F1",
+            "confidence": 54.3,
+            "status": "Moderate Confidence",
+            "is_correct": false
+        },
+        {
+            "filename": "a1005.jpg",
+            "true_stage": "F0",
+            "pred_stage": "F0",
+            "confidence": 85.4,
+            "status": "High Confidence",
+            "is_correct": true
+        },
+        {
+            "filename": "ct8-30.png",
+            "true_stage": "F2",
+            "pred_stage": "F2",
+            "confidence": 40.0,
+            "status": "Indeterminate / Low Confidence",
+            "is_correct": true
+        },
+        {
+            "filename": "ct12-57.png",
+            "true_stage": "F4",
+            "pred_stage": "F3",
+            "confidence": 55.7,
+            "status": "Moderate Confidence",
+            "is_correct": false
+        },
+        {
+            "filename": "a3807.jpg",
+            "true_stage": "F0",
+            "pred_stage": "F0",
+            "confidence": 99.8,
+            "status": "High Confidence",
+            "is_correct": true
+        },
+        {
+            "filename": "a1104.jpg",
+            "true_stage": "F0",
+            "pred_stage": "F0",
+            "confidence": 43.7,
+            "status": "Indeterminate / Low Confidence",
+            "is_correct": true
+        },
+        {
+            "filename": "ct9-65.png",
+            "true_stage": "F3",
+            "pred_stage": "F3",
+            "confidence": 61.5,
+            "status": "Moderate Confidence",
+            "is_correct": true
+        },
+        {
+            "filename": "a2833.jpg",
+            "true_stage": "F0",
+            "pred_stage": "F0",
+            "confidence": 98.4,
+            "status": "High Confidence",
+            "is_correct": true
+        },
+        {
+            "filename": "ct2-72.png",
+            "true_stage": "F1",
+            "pred_stage": "F3",
+            "confidence": 34.8,
+            "status": "Indeterminate / Low Confidence",
+            "is_correct": false
+        },
+        {
+            "filename": "ct15-36.png",
+            "true_stage": "F4",
+            "pred_stage": "F1",
+            "confidence": 34.2,
+            "status": "Indeterminate / Low Confidence",
+            "is_correct": false
+        },
+        {
+            "filename": "d19.jpg",
+            "true_stage": "F4",
+            "pred_stage": "F4",
+            "confidence": 96.0,
+            "status": "High Confidence",
+            "is_correct": true
+        },
+        {
+            "filename": "ct3-29.png",
+            "true_stage": "F2",
+            "pred_stage": "F2",
+            "confidence": 31.1,
+            "status": "Indeterminate / Low Confidence",
+            "is_correct": true
+        },
+        {
+            "filename": "b9051.jpg",
+            "true_stage": "F1",
+            "pred_stage": "F2",
+            "confidence": 40.3,
+            "status": "Indeterminate / Low Confidence",
+            "is_correct": false
+        },
+        {
+            "filename": "ct4-13.png",
+            "true_stage": "F2",
+            "pred_stage": "F2",
+            "confidence": 31.4,
+            "status": "Indeterminate / Low Confidence",
+            "is_correct": true
+        },
+        {
+            "filename": "ct15-50.png",
+            "true_stage": "F4",
+            "pred_stage": "F1",
+            "confidence": 44.3,
+            "status": "Indeterminate / Low Confidence",
+            "is_correct": false
+        },
+        {
+            "filename": "d32.jpg",
+            "true_stage": "F4",
+            "pred_stage": "F4",
+            "confidence": 88.4,
+            "status": "High Confidence",
+            "is_correct": true
+        }
+    ]
+}

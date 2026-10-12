@@ -1,0 +1,33 @@
+{
+    "model_name": "ResNet18 METAVIR Fibrosis Classifier",
+    "architecture": "ResNet18 (ImageNet Pre-trained with Staged Fine-Tuning)",
+    "class_names": [
+        "F0",
+        "F1",
+        "F2",
+        "F3",
+        "F4"
+    ],
+    "random_seed": 42,
+    "input_size": [
+        224,
+        224,
+        3
+    ],
+    "training_date": "2026-10-05 10:41:02",
+    "dataset_stats": {
+        "total_unique_images": 1210,
+        "train_samples": 847,
+        "val_samples": 181,
+        "test_samples": 182
+    },
+    "validation_metrics": {
+        "best_val_accuracy": 0.56353591160221,
+        "best_val_macro_f1": 0.5825790295502594
+    },
+    "confidence_calibration": {
+        "temperature": 1.0,
+        "confidence_threshold": 0.45,
+        "indeterminate_label": "Indeterminate / Low confidence \u2014 additional clinical assessment required"
+    }
+}
